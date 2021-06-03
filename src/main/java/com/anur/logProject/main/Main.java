@@ -21,7 +21,7 @@ public class Main {
         infoLogger.info(INFO, "NEW INFO LOGGER");
 
         errorLogger.error("NEW ERROR LOGGER");
-        otherLogger.info(OTHER, "other log test");
+        otherLogger.info(OTHER, "NEW other log test");
 
     }
 

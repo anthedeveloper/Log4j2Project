@@ -12,7 +12,17 @@
 
         <RollingFile name="InfoLogger" fileName="${BASE_PATH}/Log4j2Project/log/appInfo.log"
                      filePattern="${BASE_PATH}/Log4j2Project/log/appInfo-%d{MM-dd-yyyy}-%i.log">
-            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <MarkerFilter marker="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="OtherLogger" fileName="${BASE_PATH}/Log4j2Project/log/appOther.log"
+                     filePattern="${BASE_PATH}/Log4j2Project/log/appOther-%d{MM-dd-yyyy}-%i.log">
+            <MarkerFilter marker="OTHER" onMatch="ACCEPT" onMismatch="DENY"/>
+
             <PatternLayout pattern="${LOG_PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />
@@ -32,12 +42,16 @@
         <Logger name="com.anur.info" level="info" additivity="false">
             <AppenderRef ref="InfoLogger"/>
         </Logger>
+        <Logger name="com.anur.info2" level="info" additivity="false">
+            <AppenderRef ref="OtherLogger"/>
+        </Logger>
         <Logger name="com.anur.error" level="error" additivity="false">
             <AppenderRef ref="ErrorLogger"/>
         </Logger>
         <Root level="all">
             <AppenderRef ref="ErrorLogger"/>
             <AppenderRef ref="InfoLogger"/>
+            <AppenderRef ref="OtherLogger"/>
         </Root>
 
     </Loggers>
