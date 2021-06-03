@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="LOG_PATTERN">%d %p %c{1.} [%t] %m%n</Property>
+        <Property name="BASE_PATH">${sys:server.dir}</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="InfoLogger" fileName="${BASE_PATH}/Log4j2Project/log/appInfo.log"
+                     filePattern="${BASE_PATH}/Log4j2Project/log/appInfo-%d{MM-dd-yyyy}-%i.log">
+            <LevelRangeFilter minLevel="INFO" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorLogger" fileName="${BASE_PATH}/Log4j2Project/log/appError.log"
+                     filePattern="${BASE_PATH}/Log4j2Project/log/appError-%d{MM-dd-yyyy}-%i.log">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="com.anur.info" level="info" additivity="false">
+            <AppenderRef ref="InfoLogger"/>
+        </Logger>
+        <Logger name="com.anur.error" level="error" additivity="false">
+            <AppenderRef ref="ErrorLogger"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="ErrorLogger"/>
+            <AppenderRef ref="InfoLogger"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
