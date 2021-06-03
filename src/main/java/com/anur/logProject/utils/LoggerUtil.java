@@ -1,5 +1,6 @@
 package com.anur.logProject.utils;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,9 +9,10 @@ public final class LoggerUtil {
         super();
     }
 
-    private static Logger InfoLogger = LogManager.getLogger("infoLogger");
+    private static Logger InfoLogger = LogManager.getLogger("InfoLogger");
 
-    private static Logger ErrorLogger = LogManager.getLogger("errorLogger");
+    private static Logger ErrorLogger = LogManager.getLogger("ErrorLogger");
+    private static Logger OtherLogger = LogManager.getLogger("OtherLogger");
 
     public static Logger getInfoLogger() {
         return InfoLogger;
@@ -27,4 +29,14 @@ public final class LoggerUtil {
     public static void setErrorLogger(Logger errorLogger) {
         ErrorLogger = errorLogger;
     }
+
+    public static Logger getOtherLogger() {
+        return OtherLogger;
+    }
+
+    public static void setOtherLogger(Logger otherLogger) {
+        OtherLogger = otherLogger;
+    }
+
+
 }
